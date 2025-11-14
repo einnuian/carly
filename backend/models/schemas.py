@@ -97,6 +97,7 @@ class VehicleData(BaseModel):
     pros: List[str] = Field(default=[], description="Key advantages")
     cons: List[str] = Field(default=[], description="Notable drawbacks")
     data_sources: DataSources = Field(..., description="Data source attribution")
+    photo_url: Optional[str] = Field(default=None, description="Vehicle photo URL from Auto.dev")
 
 
 class RankedVehicle(BaseModel):
@@ -110,6 +111,7 @@ class RankedVehicle(BaseModel):
     pros: List[str]
     cons: List[str]
     data_sources: DataSources
+    photo_url: Optional[str] = Field(default=None, description="Vehicle photo URL from Auto.dev")
 
 
 class ClaudeSearchResponse(BaseModel):

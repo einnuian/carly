@@ -112,7 +112,8 @@ class ScoringService:
                 fit_score=fit_score,
                 pros=vehicle.pros,
                 cons=vehicle.cons,
-                data_sources=vehicle.data_sources
+                data_sources=vehicle.data_sources,
+                photo_url=vehicle.photo_url
             )
             ranked_vehicles.append(ranked_vehicle)
 

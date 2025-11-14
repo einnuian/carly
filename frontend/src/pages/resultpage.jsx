@@ -325,6 +325,7 @@ const ResultPage = () => {
 
         <section className="results-table-card">
           <div className="results-table-header">
+            <div className="col-photo">Photo</div>
             <div className="col-rank">Rank</div>
             <div className="col-vehicle">Vehicle</div>
             <div className="col-msrp">MSRP</div>
@@ -355,6 +356,18 @@ const ResultPage = () => {
 
               return (
                 <div className="results-row" key={car.id || idx}>
+                  <div className="col-photo">
+                    {car.photo_url ? (
+                      <img
+                        src={car.photo_url}
+                        alt={`${name} ${year}`}
+                        className="vehicle-thumb"
+                      />
+                    ) : (
+                      <div className="photo-placeholder">—</div>
+                    )}
+                  </div>
+
                   <div className="col-rank">
                     <div className="rank-pill">
                       {car.rank != null ? car.rank : idx + 1}

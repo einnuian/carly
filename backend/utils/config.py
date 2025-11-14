@@ -9,8 +9,9 @@ from typing import List
 class Settings(BaseSettings):
     """Application settings"""
 
-    # Anthropic API
+    # API Keys
     ANTHROPIC_API_KEY: str
+    AUTO_DEV_API_KEY: str
 
     # Application
     CORS_ORIGINS: str = "http://localhost:5173"

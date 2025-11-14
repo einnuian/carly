@@ -12,6 +12,8 @@ from models.schemas import (
 )
 from services.claude_service import claude_service
 from services.scoring_service import scoring_service
+from utils.photo_service import get_vehicle_photo
+from utils.config import settings
 
 logger = logging.getLogger(__name__)
 
@@ -56,7 +58,20 @@ async def get_recommendations(user_data: UserPreferencesRequest):
 
         logger.info(f"[{session_id}] Found {len(claude_response.vehicles)} vehicles")
 
-        # Step 2: Calculate weighted scores and rank vehicles using user priorities
+        # Step 2: Enrich vehicles with photos (best-effort) and then calculate weighted scores
+        logger.info(f"[{session_id}] Fetching photos for vehicles (best-effort)")
+        api_key = settings.AUTO_DEV_API_KEY
+        for v in claude_response.vehicles:
+            try:
+                photo = get_vehicle_photo(v.make_model_year, api_key)
+                if photo:
+                    # Attach photo URL to the VehicleData model so it propagates to the response
+                    v.photo_url = photo
+                    logger.debug(f"[{session_id}] Photo set for {v.make_model_year}: {photo}")
+            except Exception as e:
+                logger.warning(f"[{session_id}] Failed to fetch photo for {v.make_model_year}: {str(e)}")
+
+        # Calculate weighted scores and rank vehicles using user priorities
         logger.info(f"[{session_id}] Calculating weighted scores based on user priorities")
         scored_vehicles = scoring_service.rank_vehicles(
             claude_response.vehicles,
