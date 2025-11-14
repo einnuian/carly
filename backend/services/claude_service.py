@@ -78,7 +78,7 @@ Based on these requirements, search Edmunds.com, KBB, and other automotive sourc
       "monthly_energy_cost_usd": 96,
       "scores": {{
         "A_storage": 8.5,
-        "B_drive": 6.5,
+        "B_driving": 6.5,
         "C_comfort": 7.8,
         "D_tech": 8.2,
         "E_owner": 7.0,
@@ -100,7 +100,7 @@ Important instructions:
 1. Find 5-10 vehicles that best match the user's requirements
 2. All scores should be on a scale of 0-10 for each category:
    - A_storage: Based on cargo space, seating capacity, storage options
-   - B_drive: Based on performance, handling, driving dynamics
+   - B_driving: Based on performance, handling, driving dynamics
    - C_comfort: Based on ride quality, interior comfort, noise levels
    - D_tech: Based on infotainment, driver aids, connectivity
    - E_owner: Based on reliability, maintenance costs, resale value

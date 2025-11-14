@@ -74,7 +74,7 @@ class UserPreferencesRequest(BaseModel):
 class CategoryScores(BaseModel):
     """Category-based scores aligned with user priorities"""
     A_storage: float = Field(..., ge=0, le=10, description="Storage capacity score")
-    B_drive: float = Field(..., ge=0, le=10, description="Driving performance score")
+    B_driving: float = Field(..., ge=0, le=10, description="Driving performance score")
     C_comfort: float = Field(..., ge=0, le=10, description="Comfort score")
     D_tech: float = Field(..., ge=0, le=10, description="Technology score")
     E_owner: float = Field(..., ge=0, le=10, description="Ownership costs score")

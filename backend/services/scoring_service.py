@@ -42,7 +42,7 @@ class ScoringService:
         # get_fit_score expects: [(letter, score), ...]
         car_scores = [
             ("A_storage", scores.A_storage),
-            ("B_driving", scores.B_drive),
+            ("B_driving", scores.B_driving),
             ("C_comfort", scores.C_comfort),
             ("D_tech", scores.D_tech),
             ("E_owner", scores.E_owner),

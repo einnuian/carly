@@ -1237,7 +1237,23 @@ const QuizPage = () => {
         finalAnswers.priority_ranks = ranks;
       }
       console.log("Quiz answers:", finalAnswers);
-      alert("Quiz complete! Check the console for the JSON payload.");
+
+      // Send to backend API
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+      fetch(`${apiUrl}/api/recommendations`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(finalAnswers)
+      })
+        .then(res => res.json())
+        .then(data => {
+          console.log("Recommendations:", data);
+          alert(`Success! Received ${data.total_found} recommendations. Check console for details.`);
+        })
+        .catch(err => {
+          console.error("API Error:", err);
+          alert("Error getting recommendations. Check console for details.");
+        });
     }
   };
 
