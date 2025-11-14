@@ -1,0 +1,32 @@
+{
+  "seats": "6-7",
+  "cargo": "5-6",
+  "terrain": "snow",
+  "towing": "medium",
+  "luxuryBrand": "mainstream",
+  "driveDaily": "no",
+  "tripsPerWeek": "5-7",
+  "tripMinutes": "45-60",
+  "avgSpeed": 55,
+  "ownershipMode": "rent",
+  "price_min": 35000,
+  "price_max": 50000,
+  "fuel_min": 200,
+  "fuel_max": 300,
+  "priority_order": [
+    "A_storage",
+    "B_driving",
+    "C_comfort",
+    "D_tech",
+    "E_owner",
+    "F_style"
+  ],
+  "priority_ranks": {
+    "A_storage": 1,
+    "B_driving": 2,
+    "C_comfort": 3,
+    "D_tech": 4,
+    "E_owner": 5,
+    "F_style": 6
+  }
+}
