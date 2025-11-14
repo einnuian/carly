@@ -467,22 +467,8 @@ const QuizPage = () => {
       }
       console.log("Quiz answers:", finalAnswers);
 
-      // Send to backend API
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
-      fetch(`${apiUrl}/api/recommendations`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(finalAnswers)
-      })
-        .then(res => res.json())
-        .then(data => {
-          console.log("Recommendations:", data);
-          navigate('/results', { state: { recommendations: data } });
-        })
-        .catch(err => {
-          console.error("API Error:", err);
-          alert("Error getting recommendations. Check console for details.");
-        });
+      // Navigate to loading page which will perform the API call and show progress
+      navigate('/loading', { state: { request: finalAnswers } });
     }
   };
 

@@ -96,8 +96,8 @@
 .results-row {
   display: grid;
   grid-template-columns:
-    70px /* rank */
-    96px /* photo */
+    140px /* photo */
+    48px /* rank */
     minmax(220px, 2.2fr) /* vehicle */
     120px /* msrp */
     130px /* fuel */
@@ -167,8 +167,8 @@
 }
 
 .vehicle-thumb {
-  width: 88px;
-  height: 56px;
+  width: 120px;
+  height: 76px;
   object-fit: cover;
   border-radius: 6px;
   border: 1px solid rgba(121, 151, 196, 0.7);
@@ -176,8 +176,8 @@
 }
 
 .photo-placeholder {
-  width: 88px;
-  height: 56px;
+  width: 120px;
+  height: 76px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
