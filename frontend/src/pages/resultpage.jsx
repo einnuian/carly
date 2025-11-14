@@ -208,7 +208,7 @@ const mockResults = [
     monthly_energy_cost_usd: 96,
     scores: {
       A_storage: 8.5,
-      B_drive: 6.5,
+      B_driving: 6.5,
       C_comfort: 7.8,
       D_tech: 8.2,
       E_owner: 7.0,
@@ -230,7 +230,7 @@ const mockResults = [
     monthly_energy_cost_usd: 70,
     scores: {
       A_storage: 5.5,
-      B_drive: 9.0,
+      B_driving: 9.0,
       C_comfort: 7.0,
       D_tech: 7.5,
       E_owner: 8.5,
@@ -252,7 +252,7 @@ const mockResults = [
     monthly_energy_cost_usd: 130,
     scores: {
       A_storage: 7.5,
-      B_drive: 8.5,
+      B_driving: 8.5,
       C_comfort: 8.0,
       D_tech: 8.5,
       E_owner: 8.0,
@@ -288,8 +288,9 @@ const ResultPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Expect: navigate("/results", { state: { results: backendArray } })
-  const backendResults = location.state?.results;
+  // Expect: navigate("/results", { state: { recommendations: backendData } })
+  const backendData = location.state?.recommendations;
+  const backendResults = backendData?.recommendations;
   const rows =
     Array.isArray(backendResults) && backendResults.length
       ? backendResults
@@ -346,7 +347,7 @@ const ResultPage = () => {
               const { year, name } = parseMakeModelYear(car.make_model_year);
               const scores = car.scores || {};
               const storage = scores.A_storage;
-              const drive = scores.B_drive;
+              const drive = scores.B_driving;
               const comfort = scores.C_comfort;
               const tech = scores.D_tech;
               const owner = scores.E_owner;

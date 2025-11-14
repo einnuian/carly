@@ -55,7 +55,7 @@ Interpret these responses:
 
 **Budget & Ownership:**
 - ownershipMode: How they plan to acquire ("rent", "buy", "lease")
-- price_min / price_max: Budget range in USD
+- price_min / price_max: Budget range in USD. Do not exceed price_max by more than 1500
 - fuel_min / fuel_max: Monthly fuel budget in USD (consider fuel efficiency accordingly)
 
 **Priorities (ranked 1-6, 1 = highest priority):**

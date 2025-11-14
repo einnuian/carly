@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./quizpage.css";
 import NavBar from "./navbar";
 
@@ -317,6 +318,7 @@ const getVisibleSteps = (answers) =>
   });
 
 const QuizPage = () => {
+  const navigate = useNavigate();
   const [answers, setAnswers] = useState({});
   const [stepIndex, setStepIndex] = useState(0);
 
@@ -475,7 +477,7 @@ const QuizPage = () => {
         .then(res => res.json())
         .then(data => {
           console.log("Recommendations:", data);
-          alert(`Success! Received ${data.total_found} recommendations. Check console for details.`);
+          navigate('/results', { state: { recommendations: data } });
         })
         .catch(err => {
           console.error("API Error:", err);
