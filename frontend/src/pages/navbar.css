@@ -1,0 +1,31 @@
+.landing-nav {
+  height: 64px;
+  padding: 0 32px;
+  border-bottom: 1px solid #e4e4e4;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-logo {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.nav-links {
+  display: flex;
+  gap: 24px;
+}
+
+.nav-link {
+  border: none;
+  background: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  color: #444;
+}
+
+.nav-link:hover {
+  color: #000;
+}
