@@ -40,6 +40,7 @@ async def get_recommendations(user_data: UserPreferencesRequest):
 
     try:
         logger.info(f"[{session_id}] Received recommendation request")
+        logger.info(f"[{session_id}] Validated user data successfully")
         logger.debug(f"[{session_id}] User data: {user_data.model_dump()}")
 
         # Step 1: Call Claude to search Edmunds.com

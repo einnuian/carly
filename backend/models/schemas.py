@@ -17,7 +17,7 @@ class UserPreferencesRequest(BaseModel):
 
     # Usage patterns
     driveDaily: str = Field(..., description="Daily driving usage ('yes' or 'no')")
-    tripsPerWeek: str = Field(..., description="Number of trips per week (e.g., '5-7')")
+    tripsPerWeek: Optional[str] = Field(None, description="Number of trips per week (e.g., '5-7'), omitted if driveDaily='yes'")
     tripMinutes: str = Field(..., description="Average trip duration (e.g., '45-60')")
     avgSpeed: int = Field(..., description="Average speed in mph")
 

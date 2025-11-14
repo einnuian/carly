@@ -49,7 +49,7 @@ Interpret these responses:
 
 **Usage Patterns:**
 - driveDaily: Whether this is a daily driver ("yes" or "no")
-- tripsPerWeek: Frequency of use (e.g., "5-7" means 5-7 trips per week)
+- tripsPerWeek: Frequency of use (e.g., "5-7" means 5-7 trips per week). NOTE: This field may be omitted if driveDaily="yes" (assume 7 trips/week)
 - tripMinutes: Average trip duration (e.g., "45-60" means 45-60 minute trips)
 - avgSpeed: Average driving speed in mph (indicates city vs highway use)
 

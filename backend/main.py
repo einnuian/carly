@@ -3,8 +3,10 @@ Carly - Car Recommendation Engine
 Main FastAPI Application
 """
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import JSONResponse
 from contextlib import asynccontextmanager
 import logging
 
@@ -45,6 +47,22 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Custom exception handler for validation errors
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request: Request, exc: RequestValidationError):
+    """Log validation errors with details"""
+    body = await request.body()
+    logger.error(f"Validation Error on {request.url.path}")
+    logger.error(f"Errors: {exc.errors()}")
+    logger.error(f"Request body: {body.decode()}")
+    return JSONResponse(
+        status_code=422,
+        content={
+            "detail": exc.errors(),
+            "request_body": body.decode()
+        }
+    )
 
 # Include routers
 app.include_router(recommendations.router, prefix="/api", tags=["recommendations"])
