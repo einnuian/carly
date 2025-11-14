@@ -80,13 +80,3 @@ def fetch_vehicle_photos(vin: str, api_key: str) -> list:
     except Exception as e:
         #logger.warning(f"Failed to fetch photos for VIN {vin}: {str(e)}")
         return []
-    
-if __name__ == "__main__":
-    make = "Lexus"
-    model = "ES"
-    year = "2020"
-    api_key = "sk_ad_qeCrauqVsmWM2xZUAdFvXnEj"
-    vin = fetch_vehicle_vin(make, model, year, api_key) 
-    print(f"VIN: {vin}")
-    photos = fetch_vehicle_photos(vin, api_key)
-    print(f"Photos: {photos}")
