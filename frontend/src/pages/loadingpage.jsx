@@ -8,23 +8,29 @@ const LoadingPage = () => {
       <NavBar />
 
       <main className="loading-main">
-        <div className="loading-card">
+        <section className="loading-card">
           <div className="loading-icon-wrap">
-            <div className="loading-pulse" />
+            <div className="loading-orbit">
+              <div className="loading-orbit-inner" />
+            </div>
             <div className="loading-car">🚗</div>
           </div>
 
-          <h1 className="loading-title">Your dream car is arriving...</h1>
+          <h1 className="loading-title">Your dream car is arriving…</h1>
           <p className="loading-subtitle">
-            We’re crunching the numbers to find the best match for your needs.
+            We’re tuning the data and matching vehicles to your preferences.
           </p>
+
+          <div className="loading-bar">
+            <div className="loading-bar-fill" />
+          </div>
 
           <div className="loading-dots">
             <span />
             <span />
             <span />
           </div>
-        </div>
+        </section>
       </main>
     </div>
   );
