@@ -71,25 +71,45 @@ class UserPreferencesRequest(BaseModel):
         }
 
 
-class EdmundsScore(BaseModel):
-    """Edmunds rating scores returned by Claude"""
-    edmunds_rating: float = Field(..., ge=0, le=10)
-    consumer_rating: float = Field(..., ge=0, le=10)
-    safety_score: float = Field(..., ge=0, le=10)
-    value_rating: float = Field(..., ge=0, le=10)
+class CategoryScores(BaseModel):
+    """Category-based scores aligned with user priorities"""
+    A_storage: float = Field(..., ge=0, le=10, description="Storage capacity score")
+    B_drive: float = Field(..., ge=0, le=10, description="Driving performance score")
+    C_comfort: float = Field(..., ge=0, le=10, description="Comfort score")
+    D_tech: float = Field(..., ge=0, le=10, description="Technology score")
+    E_owner: float = Field(..., ge=0, le=10, description="Ownership costs score")
+    F_style: float = Field(..., ge=0, le=10, description="Style score")
+
+
+class DataSources(BaseModel):
+    """Sources for vehicle data"""
+    price: str = Field(..., description="Price data source (e.g., 'KBB')")
+    fuel_cost: str = Field(..., description="Fuel cost data source")
+    ratings: str = Field(..., description="Ratings data source (e.g., 'Edmunds')")
 
 
 class VehicleData(BaseModel):
-    """Vehicle information from Claude/Edmunds search"""
-    make: str
-    model: str
-    year: int
-    trim: Optional[str] = None
-    price: Optional[int] = None
-    edmunds_url: Optional[str] = None
-    scores: EdmundsScore
-    description: Optional[str] = None
-    why_recommended: Optional[str] = None
+    """Vehicle information from Claude search"""
+    make_model_year: str = Field(..., description="Combined vehicle identifier (e.g., '2025 Kia Sportage')")
+    avg_msrp_usd: int = Field(..., ge=0, description="Average MSRP in USD")
+    monthly_energy_cost_usd: int = Field(..., ge=0, description="Estimated monthly fuel/energy cost in USD")
+    scores: CategoryScores = Field(..., description="Category-based scores")
+    pros: List[str] = Field(default=[], description="Key advantages")
+    cons: List[str] = Field(default=[], description="Notable drawbacks")
+    data_sources: DataSources = Field(..., description="Data source attribution")
+
+
+class RankedVehicle(BaseModel):
+    """Vehicle with rank and fit score added"""
+    rank: int = Field(..., description="Ranking position (1 = best match)")
+    make_model_year: str
+    avg_msrp_usd: int
+    monthly_energy_cost_usd: int
+    scores: CategoryScores
+    fit_score: float = Field(..., description="Calculated fit score based on user priorities")
+    pros: List[str]
+    cons: List[str]
+    data_sources: DataSources
 
 
 class ClaudeSearchResponse(BaseModel):
@@ -99,7 +119,7 @@ class ClaudeSearchResponse(BaseModel):
 
 
 class ScoredVehicle(BaseModel):
-    """Vehicle with calculated weighted score"""
+    """Vehicle with calculated weighted score (kept for internal use)"""
     rank: int
     vehicle: VehicleData
     weighted_score: float = Field(..., description="Calculated weighted average score")
@@ -109,7 +129,7 @@ class ScoredVehicle(BaseModel):
 class RecommendationResponse(BaseModel):
     """Final response to frontend"""
     session_id: str
-    recommendations: List[ScoredVehicle]
+    recommendations: List[RankedVehicle]
     total_found: int
     message: str
 

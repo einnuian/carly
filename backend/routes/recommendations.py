@@ -55,9 +55,12 @@ async def get_recommendations(user_data: UserPreferencesRequest):
 
         logger.info(f"[{session_id}] Found {len(claude_response.vehicles)} vehicles")
 
-        # Step 2: Calculate weighted scores and rank vehicles
-        logger.info(f"[{session_id}] Calculating weighted scores")
-        scored_vehicles = scoring_service.rank_vehicles(claude_response.vehicles)
+        # Step 2: Calculate weighted scores and rank vehicles using user priorities
+        logger.info(f"[{session_id}] Calculating weighted scores based on user priorities")
+        scored_vehicles = scoring_service.rank_vehicles(
+            claude_response.vehicles,
+            user_data.priority_ranks
+        )
 
         # Step 3: Build response
         response = RecommendationResponse(

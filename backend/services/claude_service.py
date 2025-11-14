@@ -68,41 +68,52 @@ Interpret these responses:
 
 Use the priority_ranks to weight your recommendations toward what matters most to the user.
 
-Based on these requirements, search Edmunds.com for vehicles that match and return your findings in the following JSON format:
+Based on these requirements, search Edmunds.com, KBB, and other automotive sources for vehicles that match and return your findings in the following JSON format:
 
 {{
   "vehicles": [
     {{
-      "make": "Toyota",
-      "model": "Camry",
-      "year": 2024,
-      "trim": "XLE",
-      "price": 32000,
-      "edmunds_url": "https://www.edmunds.com/toyota/camry/",
+      "make_model_year": "2025 Kia Sportage",
+      "avg_msrp_usd": 34500,
+      "monthly_energy_cost_usd": 96,
       "scores": {{
-        "edmunds_rating": 8.5,
-        "consumer_rating": 8.7,
-        "safety_score": 9.0,
-        "value_rating": 8.3
+        "A_storage": 8.5,
+        "B_drive": 6.5,
+        "C_comfort": 7.8,
+        "D_tech": 8.2,
+        "E_owner": 7.0,
+        "F_style": 8.8
       }},
-      "description": "Reliable midsize sedan with excellent fuel economy",
-      "why_recommended": "Matches budget, excellent safety ratings, and hybrid option available for fuel efficiency"
+      "pros": ["Stylish interior", "Huge cargo space", "Strong tech"],
+      "cons": ["Leisurely acceleration"],
+      "data_sources": {{
+        "price": "KBB",
+        "fuel_cost": "KBB MPG + GasBuddy",
+        "ratings": "Edmunds"
+      }}
     }}
   ],
-  "search_summary": "Found 5 vehicles matching the criteria within budget range"
+  "search_summary": "Found 5 vehicles matching the criteria"
 }}
 
 Important instructions:
 1. Find 5-10 vehicles that best match the user's requirements
-2. All scores should be on a scale of 0-10
-3. Include actual Edmunds ratings, consumer ratings, safety scores, and value ratings
-4. Provide real vehicles that are currently available or recent models (2023-2025)
-5. Ensure prices are within the specified budget range (price_min to price_max)
-6. Consider the monthly fuel budget when recommending vehicles (prioritize fuel-efficient options if budget is low)
-7. Weight your recommendations based on the user's priority_ranks (rank 1 = most important)
-8. Include a brief explanation of why each vehicle is recommended, referencing their top priorities
+2. All scores should be on a scale of 0-10 for each category:
+   - A_storage: Based on cargo space, seating capacity, storage options
+   - B_drive: Based on performance, handling, driving dynamics
+   - C_comfort: Based on ride quality, interior comfort, noise levels
+   - D_tech: Based on infotainment, driver aids, connectivity
+   - E_owner: Based on reliability, maintenance costs, resale value
+   - F_style: Based on exterior design, interior aesthetics
+3. Provide real vehicles that are currently available or recent models (2023-2025)
+4. Ensure avg_msrp_usd is within the specified budget range (price_min to price_max)
+5. Calculate monthly_energy_cost_usd based on actual MPG/MPGe and current fuel/electricity prices
+6. Ensure monthly_energy_cost_usd fits within the fuel_min to fuel_max budget
+7. Weight your recommendations based on the user's priority_ranks (rank 1 = most important category)
+8. Include 3-5 specific pros and 1-3 honest cons for each vehicle
 9. For ownership mode "rent", focus on popular rental-friendly vehicles
-10. Return ONLY the JSON object, no additional text
+10. Cite data sources accurately (KBB for pricing, Edmunds for ratings, etc.)
+11. Return ONLY the JSON object, no additional text
 
 Begin your search and return the results in JSON format."""
 
